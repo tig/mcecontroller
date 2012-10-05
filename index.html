@@ -24,14 +24,7 @@
       <div id="banner">
         <span id="logo"></span>
 
-        <a href="https://github.com/tig/mcecontroller" class="button fork"><strong>Fork On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/tig/mcecontroller/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/tig/mcecontroller/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
+        <a href="https://github.com/tig/mcecontroller" class="button fork"><strong>Get Sourcecode on GitHub</strong></a>
 
       </div><!-- end banner -->
 
@@ -306,6 +299,7 @@ Renamed a few commands ("mce_start" is now "mcestart" for example) to be more co
 <li>Version 1.4.0 (February 11, 2012) - Server now supports any number of client connections. Expanded MCEController.commands to include commands used by iRule (<a href="http://iruleathome.com">http://iruleathome.com</a>). Updated About Box &amp; Help menu to reflect move to GitHub. Added menu item to open directory containing MCEController.commands.</li>
 <li>Version 1.5.0 (March 27, 2012) - 'chars:' command now supports escaped characters. This allows the sending of Unicode characters such as € (e.g. 'chars:\u20AC' will cause the € character to be input on the server machine).</li>
 <li>Version 1.5.1 (April 2, 2012) - Removed readme file from distribution and updated online docs. </li>
+<li>Version 1.5.2 (October, 4, 2012) - Fixed .settings file bug where it would sometimes read from Program Files and write to AppData. Now always writes to AppData unless started outside of Program Files. Fixed Setting dialog to be more resilient to bad data. Fixed Send Awake so that it does not fault on bad data, but logs errors. General code clean up. Built with VS2012.</li>
 </ul>
       </section>
       <footer>
