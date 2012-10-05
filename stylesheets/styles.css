@@ -709,7 +709,7 @@ header p {
   border-radius: 0px 2px 2px 0px;
   padding-right: 10px;
 }
-#banner .button {
+.button {
   border: 1px solid #dba500;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffe788), color-stop(100%, #ffce38));
   background: -webkit-linear-gradient(#ffe788, #ffce38);
@@ -738,7 +738,7 @@ header p {
   display: inline-block;
   text-align: center;
 }
-#banner .button:hover {
+.button:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffe788), color-stop(100%, #ffe788));
   background: -webkit-linear-gradient(#ffe788, #ffe788);
   background: -moz-linear-gradient(#ffe788, #ffe788);
@@ -747,12 +747,11 @@ header p {
   background: linear-gradient(#ffe788, #ffe788);
   background-color: #ffeca0;
 }
-#banner .fork {
-  position: fixed;
-  left: 50%;
-  margin-left: -325px;
+.fork {
+  float: right;
   padding: 10px 12px;
   margin-top: 6px;
+  margin-right: 50px;
   line-height: 14px;
   font-size: 14px;
   background-color: #FFE788;
