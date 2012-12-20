@@ -40,13 +40,13 @@
 <p><a href="http://sourceforge.net/donate/index.php?group_id=138158">Support this project</a></p>
 
 <p style="text-align: center;">
-<a href="http://ceklog.wpengine.netdna-cdn.com/wp-content/uploads/2012/12/MCEController-1.6.1-Setup.exe" class="button"><strong>Download the latest version</strong></a>
+<a href="http://ceklog.wpengine.netdna-cdn.com/wp-content/uploads/2012/12/MCEController-1.7.0-Setup.exe" class="button"><strong>Download the latest version</strong></a>
 </p>
 
 <h2>Overview</h2>
-<p><img src="http://www.kindel.com/products/mcecontroller/MCE%20Controller.png" alt="Screenshot"></p>
+<p><img src="http://i.imgur.com/fAR59.png" alt="Screenshot"></p>
 
-<p>MCE Controller lets you control a Windows HTPC (or any PC) over the network. It runs in the background listening on the network for commands. It then translates those commands into actions such as keystrokes, text input, and the starting of programs. Any remote control, home control system, or application that can send text strings via TCP/IP can use MCE Controller to control a Windows PC.</p>
+<p>MCE Controller lets you control a Windows HTPC (or any PC) over the network. It runs in the background listening on the network (or serial port) for commands. It then translates those commands into actions such as keystrokes, text input, and the starting of programs. Any remote control, home control system, or application that can send text strings via TCP/IP or a serial port can use MCE Controller to control a Windows PC.</p>
 
 <p>For example: </p>
 
@@ -55,11 +55,13 @@
 <li>The command <code>maximize</code> will cause the current window to be maximized on the display. This is equivalent to choosing the "Maximize" button on the window's window menu. </li>
 <li>The command <code>chars:Hello World!</code> will cause the text "Hello World" to be typed, as though it were typed on the keyboard. </li>
 <li>The commands that MCE Controller support is extensible through a configuration file. If it does not natively support a function you wish, you can add new commands easily.</li>
-</ul><p>MCE Controller was initially developed to enable integration of a Windows based home theater PC (HTPC) into a Crestron whole-house audio/video system. However, it is general enough that others have used ti within other control system that support sending text strings to a TCP/IP port. Most control systems, such as Crestron or AMX, support IR emitting. </p>
+</ul><p>MCE Controller was initially developed to enable integration of a Windows based home theater PC (HTPC) into a Crestron whole-house audio/video system. However, it is general enough that others have used it with other control system that support sending text strings to a TCP/IP or serial (RS-232) port. Most control systems, such as Crestron or AMX, support IR emitting. </p>
 
 <p>For many applications, emitting the MCE IR commands will suffice. However, for some installations the reliability of IR emitting and other factors may make IR emitting problematic and MCE Controller offers a robust solution.</p>
 
 <p>MCE Controller can act as either a TCP/IP client or server. When acting as a client the target host and port can be configured. When acting as a server the incoming port can be configured.</p>
+
+<p>MCE Controller can also listen on an RS-232 serial port.</p>
 
 <p>MCE Controller runs showing only a taskbar icon. By double clicking on the taskbar a status window is displayed that shows a log of all activity. You can also right-click on the taskbar icon for a menu.</p>
 
@@ -73,6 +75,7 @@
 
 <ul>
 <li>Can act as a TCP/IP client or server. Supports any number of simultaneous clients.</li>
+<li>Can act as a serial server listening on RS-232 COM port.</li>
 <li>Supports simulating keypresses (e.g. Alt-Tab, or Win-S) with <code>SendInput</code> commands.</li>
 <li>Supports simulating Windows messages (e.g. <code>WM_SYSCOMMAND</code> / <code>SC_MAXIMIZE</code>) with <code>SendMessage</code> commands.</li>
 <li>Supports simulating start process commands (e.g. run <code>notepad.exe</code>) with the <code>StartProcess</code> command.</li>
@@ -82,6 +85,7 @@
 <code>MCEController.commands</code> includes common Windows Media Center commands. It can easily be extended to suit your needs.</li>
 <li>Supports running multiple instances.</li>
 <li>TCP/IP port can be changed in Settings.</li>
+<li>COM port and settings can be changed in Settings.</li>
 <li>Runs minimzed as a taskbar icon by default. This can be changed in Settings...</li>
 </ul><h2>Support</h2>
 
@@ -110,7 +114,7 @@
 
 <h2>Configuration</h2>
 
-<p><img src="http://i.imgur.com/rL2P0.png" alt="Settings Dialog"></p>
+<p><img src="http://i.imgur.com/Ov4lo.png" alt="Settings Dialog"></p>
 
 <p>Note that all configuration settings are stored in a file that will be created in the <code>%APPDATA%\Roaming\Kindel Systems\MCE Controller</code> directory when MCE Controller is first run. The configuration settings file is named <code>MCEControl.settings</code>.</p>
 
@@ -122,7 +126,7 @@
 
 <p>The Client tab in the Settings dialog controls MCE Controller’s TCP/IP client functionality. When acting as a client, MCE Controller will repeatedly try to connect to the specified port on the specified host and wait for commands to be sent from the host. MCE Controller sends nothing to the host.</p>
 
-<p><img src="http://i.imgur.com/95d3U.png" alt="Client Tab"></p>
+<p><img src="http://i.imgur.com/iSZXa.png" alt="Client Tab"></p>
 
 <ul>
 <li>Enable Client. This checkbox enables or disables the TCP/IP client functionality. If enabled, the followings settings apply:</li>
@@ -135,13 +139,28 @@
 
 <p>In server mode, MCE Controller supports any number of multiple-simultaneous connections. </p>
 
-<p><img src="http://i.imgur.com/M2THm.png" alt="Server Tab"></p>
+<p><img src="http://i.imgur.com/1WPgb.png" alt="Server Tab"></p>
 
 <ul>
 <li>Enable Server. This checkbox enables or disables the TCP/IP server functionality. If enabled, the followings settings apply:</li>
 <li>Port. This is the port that MCE Controller will listen on.</li>
 <li>Enable Wakeup. If enabled, MCE Controller will attempt to connect to the specified host/port, send the “Wakeup command” and disconnect when it first starts. When it shuts down it will send the “Closing command”. This functionality is useful when the remote client needs to be notified that MCE Controller is ready (for example after the server PC has rebooted).</li>
-</ul><h2>Testing MCE Controller</h2>
+</ul>
+
+<h2>
+<a name="the-serial-server-tab" class="anchor" href="#the-serial-server-tab"><span class="mini-icon mini-icon-link"></span></a>The Serial Server Tab</h2>
+
+<p>The Serial Server tab in the Settings dialog controls MCE Controller’s serial port (RS-232) functionality.  When the Serial Server is enabled, MCE Controller will open the specified COM port (e.g. COM1) and wait commands to be sent. </p>
+
+<p><img src="http://i.imgur.com/zHCgr.png" alt="Serial Server Tab"></p>
+
+<ul>
+<li>Enable Server. This checkbox enables or disables the Serial Server functionality. It is disabled by default. If enabled, the followings settings apply:</li>
+<li>Port. This is the serial port that MCE Controller will listen on (e.g. COM1).</li>
+<li>Baud Rate. Sets the speed of the serial port.</li>
+<li>Data Bits, Parity, Stop Bits, and Handshake: Set the serial port configuration.</li>
+</ul>
+<h2>Testing MCE Controller</h2>
 
 <p>To get a feel for how MCE Controller works you can test it on your local machine fairly easily. First you need some program that can send arbitrary text strings via TCP/IP. Examples of such programs:</p>
 
@@ -157,6 +176,21 @@
 
 <p>Note the Windows version of NetCat does not exit automaticaly. The <code>-w</code> parameter you see in the screenshot above tells it to wait 1 second before exiting. On other platforms NetCat works as expected. </p>
 
+<h3>Using PUTTY</h3>
+<p>PuTTY is a free terminal emulator (and Telnet and SSH client). It works well for testing MCE Controller. You can download <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/" target="_blank">PuTTY here</a>.</p>
+<h4>Using PUTTY to test TCP/IP interactions</h4>
+<p><img src="http://i.imgur.com/PwXOX.png" alt="Using PUTTY over TCP/IP"></p>
+<ol>
+<li>Run PUTTY.EXE</li>
+<li>Set <em>Host Name</em> to <em>localhost</em> (or the network name of the PC running MCE Controller</li>
+<li>Set <em>Port</em> to the port MCE Controller is set to listen on (e.g. 5150)</li>
+<li>Set the <em>Connection Type</em> to <em>Raw</em>.</li>
+<li>Click <em>Open</em></li>
+</ol>
+<p>Type commands in the PuTTY Window and see how MCE Controller reacts. In the example above the command <em>close</em> was typed, followed by the enter key. This caused <em>Alt-F4</em> to be sent to the foreground windows (PuTTY).</p>
+<p><img src="http://i.imgur.com/vwIoQ.png" alt="PUTTY example"></p>
+<h4>Using PUTTY to test serial connections</h4>
+<p>PuTTY supports connecting via serial ports. The usage is the same as in the TCP/IP example above except you set the appropriate COM port settings in PuTTY and choose the <em>Serial</em> destination type.</p>
 <h2>Commands</h2>
 
 <p>MCE Controller works with <em>Commands</em>. Commands are text strings like <code>greenbutton</code>, <code>hibernate</code>, and <code>alttab</code>. Each command has a <em>Type</em>. When MCE Controller recieves a command it causes an action to happen on the PC it is running on. The action taken is dependent on the type of command and the parameters set for that command in the <code>MCEControl.commands</code> file.</p>
@@ -336,6 +370,7 @@ Renamed a few commands ("mce_start" is now "mcestart" for example) to be more co
 <li>Version 1.5.1 (April 2, 2012) - Removed readme file from distribution and updated online docs. </li>
 <li>Version 1.5.2 (October, 4, 2012) - Fixed .settings file bug where it would sometimes read from Program Files and write to AppData. Now always writes to AppData unless started outside of Program Files. Fixed Setting dialog to be more resilient to bad data. Fixed Send Awake so that it does not fault on bad data, but logs errors. General code clean up. Built with VS2012.</li>
 <li>Version 1.6.0 (October 10, 2012) - Added mouse simulation support. </li>
+<li>Version 1.7.0 (December 19, 2012) - Added Serial Server support.</li>
 </ul>
       </section>
       <footer>
