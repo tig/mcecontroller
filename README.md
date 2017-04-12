@@ -1,5 +1,3 @@
 # MCE Controller 
 
-**MCE Controller has moved to CodePlex**
-
-New location: (http://mcec.codeplex.com)
+New location: (https://github.com/tig/mcec)
